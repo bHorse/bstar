@@ -4,6 +4,7 @@ import com.xiaosky.bstar.auth.domain.Role;
 import com.xiaosky.bstar.auth.domain.User;
 import com.xiaosky.bstar.auth.repository.RoleRespository;
 import com.xiaosky.bstar.auth.repository.UserRespository;
+import com.xiaosky.bstar.webmvc.controller.TestController;
 import com.xiaosky.bstar.webmvc.test.common.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,10 @@ public class Demo02 extends BaseTest {
         Set<User>users=new HashSet<>();
         users.add(user);
         role.addUsers(users);
+    }
+    @Autowired TestController testController;;
+    @Test
+    public void testAspect(){
+        testController.hello();
     }
 }

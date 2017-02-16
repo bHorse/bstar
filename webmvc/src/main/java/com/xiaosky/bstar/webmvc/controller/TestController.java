@@ -19,7 +19,7 @@ public class TestController {
     @ResponseBody
     @RequestMapping(value = "hello",method = RequestMethod.GET)
     public String hello(){
-       userService.restPwd("hah","123","321");
+      // userService.restPwd("hah","123","321");
         return "hello111";
     }
     @RequestMapping(value = "index",method = RequestMethod.GET)
