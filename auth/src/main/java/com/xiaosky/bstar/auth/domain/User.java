@@ -76,10 +76,32 @@ public class User {
         for(Role role:roles){
             int permissCode = Integer.parseInt(role.getCodeByModule(menu.getModule()).orElse("0"),2);//如果为空,表示对该模块没有任何权限
             int number = Integer.parseInt(menu.getNumber(),2);
-            int result = permissCode & number;
+            return permissCode==( permissCode | number);
             //如果权限编码与菜单所需的权限编码取与计算以后,还等原权限编码,表示拥有访问权限
-            if(permissCode==result)return true;
         }
         return false;
+    }
+
+    /**
+     * 获取该用户的所有角色,对该模块所拥有的权限总和
+     * 权限编码为2进制数据, 同一个模块的所有权限编码取 或运算即为总的权限
+     * @param module
+     * @return
+     */
+    private int getAllPermiss(Module module){
+        return roles.stream().map(r->Integer.parseInt(r.getCodeByModule(module).orElse("0"),2))
+                .reduce(0,(x,y)->x|y);
+    }
+
+    /**
+     * 该用户在该模块下面,是否拥有这个权限
+     * @param module
+     * @param persmiss
+     * @return
+     */
+    public boolean isValidated(Module module,int persmiss){
+        if (module==null) return false;
+        int allPermiss = getAllPermiss(module);
+        return allPermiss==(allPermiss|persmiss);
     }
 }

@@ -53,7 +53,7 @@ public class Role {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    private void setUsers(Set<User> users) {
         this.users = users;
     }
 
